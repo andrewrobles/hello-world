@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 
 export default function Home() {
   const router = useRouter()
-  const href = 'https://forms.gle/HDAtWHGtAZBGdYxN8'
+  const href = 'https://calendly.com/andrewrobles/pythontutoring'
 
   useEffect(() => {
     router.push(href)
