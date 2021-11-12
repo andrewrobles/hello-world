@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
+import styles from '../styles/Home.module.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default function Index() {
   const [state, setState] = useState({
@@ -52,7 +54,7 @@ function Calendar(props) {
   return (
     <div>
       <button onClick={onClick}>‹ Back to tutor list</button>
-      <Image src={"/" + tutor.image}  alt="Hello World School Logo" width={50} height={50} />
+      <Image src={"/" + tutor.image}  alt="Hello World School Logo" width={75} height={75} />
       <div>{tutor.name}</div>
       <div>{tutor.headline}</div>
       <iframe src={tutor.url} width={1000} height={1000}></iframe>
@@ -63,10 +65,18 @@ function Calendar(props) {
 
 function Home(props) {
   return (
-    <div>
-      <Image src="/logo.png" alt="Hello World School Logo" width={50} height={50} />
-      <div>Questions? Email us at andrew@helloworld.school</div>
-      {props.tutors.map(tutor => <Tutor tutor={tutor} setIndex={props.setIndex}/>)}
+    <div className={`${styles.home}`}>
+      <div className={`container`}>
+        <div className={`row`}>
+          <div className={`col`}>
+            <Image src="/logo.png" alt="Hello World School Logo" width={50} height={50} />
+          </div>
+          <div className={`col`}>
+            <div>Questions? Email us at andrew@helloworld.school</div>
+          </div>
+        </div>
+        {props.tutors.map(tutor => <Tutor tutor={tutor} setIndex={props.setIndex}/>)}
+      </div>
     </div>
   )
 }
@@ -76,13 +86,26 @@ function Tutor(props) {
     props.setIndex(props.tutor.id)
   }
   return (
-    <div>
-      <Image src={"/" + props.tutor.image}  alt="Hello World School Logo" width={50} height={50} />
-      <div>{props.tutor.name}</div>
-      <div>{props.tutor.headline}</div>
-      <div>{props.tutor.bio}</div>
-      <button onClick={onClick}>Meet with me</button>
-    </div>
+    <span>
+      <div className={`row`}>
+        <div className={`col-1`}>
+          <Image src={"/" + props.tutor.image}  alt="Hello World School Logo" width={50} height={50} />
+        </div>
+        <div className={`col`}>
+          <div>{props.tutor.name}</div>
+          <div>{props.tutor.headline}</div>
+          <div>{props.tutor.bio}</div>
+        </div>
+      </div>
+      <div className={`row`}>
+        <div className={`col`}>
+        </div>
+        <div className={`col-4`}>
+          <button onClick={onClick}>Meet with me</button>
+        </div>
+      </div>
+    </span>
+
   )
 }
 

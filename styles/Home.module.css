@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+.home {
+  background-color: #F5F6F6;
+  height: 1000px;
+}
+
 .calendar {
   height: 1000px;
   width: 100%;
