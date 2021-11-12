@@ -12,32 +12,53 @@ export default function Index() {
     })
   }
 
+  const resetIndex = () => {
+    setState({
+      index: -1
+    })
+  }
+
   const tutors = [
     {
-      id: 1,
+      id: 0,
       name: "Andrew R.",
       image: "andrew-robles.jpg",
       headline: "Enthusiastic Python Programming Tutor",
       bio: "Hello world! My name is Andrew and I'm a software engineer by day, Python programming tutor by night. Would YOU like to gain the skills needed to succeed in computer science? If you choose me as a tutor you will learn what it takes to become a great programmer. Whether you are a student who needs help with your coding assignments or someone who wants to learn Python from scratch, I am confident that I can help you reach your goals!\n\nI have both academic and industry experience with the Python programming language. My academic training comes from UC Berkeley, the #1 ranked public school in the world. The reason why I specialize in Python is that it’s fun to learn and extremely relevant in today's world of technology!\n\nI'm very friendly and love to help new and aspiring programmers. So if you think that we might be a good fit, please reach out!",
+      url: "https://calendly.com/hello-world-school/andrew-robles"
     },
     {
-      id: 2,
+      id: 1,
       name: "Matthew D.",
       image: "matthew-dawidowicz.jpg",
       headline: "Knowledgeable Python Programming Tutor",
-      bio: "Hello, I am Matthew (you can call me Matt). I truly love data and revealing to people what it can show. I am always focused first on providing the most comprehensive, polished explanations possible in a clear and concise manner, because students always deserve true honesty and quality from whomever they hire.\n\nI'm a data scientist by trade (MS in Data Science from Columbia University's Fu Foundation School of Engineering and Applied Science) with specialties in Data Visualization, Machine Learning, Natural Language Processing, and Data Mining. I previously worked in financial compliance and healthcare technology, but I am here to work with anything data-related, particularly to its presentation.\n\nAre you struggling with Python in your computer science course? Whether you are struggling with finishing a difficult assignment or understanding computer science concepts, I am confident that I can help you pass your class with flying colors. So don't hesitate to reach out! You will be glad you did."
+      bio: "Hello, I am Matthew (you can call me Matt). I truly love data and revealing to people what it can show. I am always focused first on providing the most comprehensive, polished explanations possible in a clear and concise manner, because students always deserve true honesty and quality from whomever they hire.\n\nI'm a data scientist by trade (MS in Data Science from Columbia University's Fu Foundation School of Engineering and Applied Science) with specialties in Data Visualization, Machine Learning, Natural Language Processing, and Data Mining. I previously worked in financial compliance and healthcare technology, but I am here to work with anything data-related, particularly to its presentation.\n\nAre you struggling with Python in your computer science course? Whether you are struggling with finishing a difficult assignment or understanding computer science concepts, I am confident that I can help you pass your class with flying colors. So don't hesitate to reach out! You will be glad you did.",
+      url: "https://calendly.com/hello-world-school/andrew-robles"
     }
   ]
 
   if (state.index == -1) {
     return <Home tutors={tutors} setIndex={setIndex}/>
   } else {
-    return <Calendar />
+    return <Calendar tutors={tutors} index={state.index} resetIndex={resetIndex}/>
   }
 }
 
 function Calendar(props) {
-  return <p>Hello</p>
+  const tutor = props.tutors[props.index]
+  const onClick = () => {
+    props.resetIndex()
+  }
+  return (
+    <div>
+      <button onClick={onClick}>‹ Back to tutor list</button>
+      <Image src={"/" + tutor.image}  alt="Hello World School Logo" width={50} height={50} />
+      <div>{tutor.name}</div>
+      <div>{tutor.headline}</div>
+      <iframe src={tutor.url} width={1000} height={1000}></iframe>
+      <div>Questions? Email us at andrew@helloworld.school</div>
+    </div>
+  )
 }
 
 function Home(props) {
@@ -52,7 +73,7 @@ function Home(props) {
 
 function Tutor(props) {
   const onClick = ()=> {
-    props.setIndex(props.id)
+    props.setIndex(props.tutor.id)
   }
   return (
     <div>
