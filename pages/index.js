@@ -1,18 +1,27 @@
 import Image from 'next/image'
+import { useState } from 'react'
 
 export default function Index() {
-  return <Home />
-}
+  const [state, setState] = useState({
+    index: -1
+  })
 
-function Home() {
+  const setIndex = (index) => {
+    setState({
+      index: index
+    })
+  }
+
   const tutors = [
     {
+      id: 1,
       name: "Andrew R.",
       image: "andrew-robles.jpg",
       headline: "Enthusiastic Python Programming Tutor",
       bio: "Hello world! My name is Andrew and I'm a software engineer by day, Python programming tutor by night. Would YOU like to gain the skills needed to succeed in computer science? If you choose me as a tutor you will learn what it takes to become a great programmer. Whether you are a student who needs help with your coding assignments or someone who wants to learn Python from scratch, I am confident that I can help you reach your goals!\n\nI have both academic and industry experience with the Python programming language. My academic training comes from UC Berkeley, the #1 ranked public school in the world. The reason why I specialize in Python is that it’s fun to learn and extremely relevant in today's world of technology!\n\nI'm very friendly and love to help new and aspiring programmers. So if you think that we might be a good fit, please reach out!",
     },
     {
+      id: 2,
       name: "Matthew D.",
       image: "matthew-dawidowicz.jpg",
       headline: "Knowledgeable Python Programming Tutor",
@@ -20,23 +29,38 @@ function Home() {
     }
   ]
 
+  if (state.index == -1) {
+    return <Home tutors={tutors} setIndex={setIndex}/>
+  } else {
+    return <Calendar />
+  }
+}
+
+function Calendar(props) {
+  return <p>Hello</p>
+}
+
+function Home(props) {
   return (
     <div>
       <Image src="/logo.png" alt="Hello World School Logo" width={50} height={50} />
       <div>Questions? Email us at andrew@helloworld.school</div>
-      {tutors.map(tutor => <Tutor tutor={tutor}/>)}
+      {props.tutors.map(tutor => <Tutor tutor={tutor} setIndex={props.setIndex}/>)}
     </div>
   )
 }
 
 function Tutor(props) {
+  const onClick = ()=> {
+    props.setIndex(props.id)
+  }
   return (
     <div>
       <Image src={"/" + props.tutor.image}  alt="Hello World School Logo" width={50} height={50} />
       <div>{props.tutor.name}</div>
       <div>{props.tutor.headline}</div>
       <div>{props.tutor.bio}</div>
-      <button>Meet with me</button>
+      <button onClick={onClick}>Meet with me</button>
     </div>
   )
 }
