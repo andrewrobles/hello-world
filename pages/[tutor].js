@@ -8,7 +8,8 @@ const Tutor = () => {
     const { tutor } = router.query
 
     const tutors = {
-        andrew: "https://calendly.com/hello-world-school/andrew"
+        andrew: "https://calendly.com/hello-world-school/andrew",
+        samir: "https://calendly.com/hello-world-school/samir"
     }
 
     const url = tutors[tutor];
